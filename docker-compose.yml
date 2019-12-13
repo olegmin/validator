@@ -6,4 +6,6 @@ services:
     image: validator:0.1
     volumes:
       - ./validator/code:/appcode
+      - ./conditions:/tmp/conditions
+      - ./organizations:/tmp/organizations
     command: python3 run.py
