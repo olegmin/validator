@@ -37,16 +37,28 @@ class ValidationRules:
 
     def analize_rule(self, rule_name):
         rule = self.global_rules[rule_name]
-        if self.cond(rule['if']):
-            return self.exec(rule['then'])
+        if self._cond(rule['if']):
+            return self._exec(rule['then'])
         else:
-            return self.exec(rule['else'])
+            return self._exec(rule['else'])
 
-    def cond(self, options):
+    def _cond(self, options):
+        """
+        Проверка состояния в данном правиле
+        :param options: словарь с полями для проверки состояния
+        :return some method execution: результат выполнения метода, имя
+            которого указано в файле валидации
+        """
         method_name = options.pop('cond')
         return getattr(self, method_name)(options)
 
-    def exec(self, options):
+    def _exec(self, options):
+        """
+        Выполнение заданного метода
+        :param options: словарь с именем и параметрами запуска указанного метода
+        :return some method execution: результат работы произвольного метода,
+            указанного в файле валидации
+        """
         type = options.pop('type')
         if type == 'rule':
             return self.analize_rule(options['name'])

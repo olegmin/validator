@@ -35,6 +35,6 @@ if __name__ == "__main__":
     company, conditions, v = get_prev_data()
 
     for condition in conditions:
-        print(f"Validate condition: {condition['file_name']}")
+        print(f"Validate: {condition['file_name'].split('.')[0]}")
         res = v.validate(condition)
-        print(f"Result of validation: {res}\n\n")
+        print(f"\tResult: {res}\n")
