@@ -36,10 +36,8 @@ class ValidationRules:
         return self.analize_rule('rule_1')
 
     def analize_rule(self, rule_name):
-        print(f"Analize: {rule_name}")
         rule = self.global_rules[rule_name]
         if self.cond(rule['if']):
-            print(f"\tCondition is true. Execute 'then' ")
             return self.exec(rule['then'])
         else:
             return self.exec(rule['else'])
@@ -57,8 +55,7 @@ class ValidationRules:
 
     def greater_then_on_equal_to(self, options):
         company_value = self.company[options['field']]
-        target_value = options['value']
-        return int(company_value) >= target_value
+        return company_value >= options['value']
 
     def range(self, options):
         company_value = self.company[options['field']]
