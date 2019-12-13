@@ -31,8 +31,9 @@ def get_prev_data():
 if __name__ == "__main__":
     company, conditions = get_prev_data()
 
-    v = ValidationRules()
+    v = ValidationRules(company)
 
     for condition in conditions:
+        print(f"Validate condition: {condition}")
         res = v.validate(condition)
-        print(res)
+        print(f"Result of validate = {res}\n\n")

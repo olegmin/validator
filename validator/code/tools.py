@@ -7,7 +7,6 @@ class Company:
 
     def __init__(self, data):
         self.values = data
-        print(f"[ Company ] Values: {self.values}")
 
     def __getitem__(self, key):
         if key == "":
@@ -28,17 +27,46 @@ class Company:
 
 class ValidationRules:
 
-    def __init__(self):
+    def __init__(self, company):
+        self.company = company
         self.global_rules = None
 
     def validate(self, r):
         self.global_rules = r
+        return self.analize_rule('rule_1')
 
-    def _condition(self, options):
+    def analize_rule(self, rule_name):
+        print(f"Analize: {rule_name}")
+        rule = self.global_rules[rule_name]
+        if self.cond(rule['if']):
+            print(f"\tCondition is true. Execute 'then' ")
+            return self.exec(rule['then'])
+        else:
+            return self.exec(rule['else'])
 
+    def cond(self, options):
+        method_name = options.pop('cond')
+        return getattr(self, method_name)(options)
 
-    def type(self, rule, options):
-        return getattr(self, 'type')(s1, s2)
+    def exec(self, options):
+        type = options.pop('type')
+        if type == 'rule':
+            return self.analize_rule(options['name'])
+        else:
+            return getattr(self, type)(options)
 
-    def _do(self):
-        pass
+    def greater_then_on_equal_to(self, options):
+        company_value = self.company[options['field']]
+        target_value = options['value']
+        return int(company_value) >= target_value
+
+    def range(self, options):
+        company_value = self.company[options['field']]
+        return options['min'] < company_value < options['max']
+
+    def equal(self, options):
+        company_value = self.company[options['field']]
+        return options['value'] == company_value
+
+    def result(self, options):
+        return options
