@@ -24,3 +24,18 @@ class Company:
             return self.recursive_value(dct[item], items_list)
         else:
             return dct[items_list[0]]
+
+
+class ValidationRules:
+
+    def __init__(self):
+        pass
+
+    def validate(self):
+        pass
+
+    def _condition(self):
+        pass
+
+    def _do(self):
+        pass
