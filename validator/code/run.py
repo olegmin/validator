@@ -19,6 +19,7 @@ def get_prev_data():
     dir_path = "/tmp/conditions/"
     for file in os.listdir(path=dir_path):
         data = json_reader(dir_path+file)
+        data['file_name'] = file
         conditions.append(data)
 
     file_path = "/tmp/organizations/organization.json"
@@ -34,6 +35,6 @@ if __name__ == "__main__":
     company, conditions, v = get_prev_data()
 
     for condition in conditions:
-        print(f"Validate condition: {condition}")
+        print(f"Validate condition: {condition['file_name']}")
         res = v.validate(condition)
-        print(f"Result of validate = {res}\n\n")
+        print(f"Result of validation: {res}\n\n")
