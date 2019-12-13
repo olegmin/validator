@@ -3,7 +3,8 @@
 """
 import os
 from filehadler import json_reader
-from tools import Company
+from tools import Company, ValidationRules
+
 
 def get_prev_data():
     """
@@ -21,7 +22,8 @@ def get_prev_data():
         conditions.append(data)
 
     file_path = "/tmp/organizations/organization.json"
-    company = Company(json_reader(file_path))
+    company_data = json_reader(file_path)
+    company = Company(company_data)
 
     return company, conditions
 
@@ -29,14 +31,9 @@ def get_prev_data():
 if __name__ == "__main__":
     company, conditions = get_prev_data()
 
-    res = company["egrul.uk"]
-    print(res)
+    v = ValidationRules(company)
 
-    res = company['cbr']
-    print("\n\n", res)
-
-    res = company['egrul.налогообложение']
-    print("\n\n", res)
-
-    res = company['']
-    print("\n\n", res)
+    for condition in conditions:
+        print(f"Validate condition: {condition}")
+        res = v.validate(condition)
+        print(f"Result of validate = {res}\n\n")
