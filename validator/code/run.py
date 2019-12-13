@@ -5,6 +5,7 @@ import os
 from filehadler import json_reader
 from tools import Company
 
+
 def get_prev_data():
     """
     Собирает необходимые данные для запуска программы
@@ -21,7 +22,8 @@ def get_prev_data():
         conditions.append(data)
 
     file_path = "/tmp/organizations/organization.json"
-    company = Company(json_reader(file_path))
+    company_data = json_reader(file_path)
+    company = Company(company_data)
 
     return company, conditions
 
