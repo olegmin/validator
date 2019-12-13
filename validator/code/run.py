@@ -25,13 +25,13 @@ def get_prev_data():
     company_data = json_reader(file_path)
     company = Company(company_data)
 
-    return company, conditions
+    validator = ValidationRules(company)
+
+    return company, conditions, validator
 
 
 if __name__ == "__main__":
-    company, conditions = get_prev_data()
-
-    v = ValidationRules(company)
+    company, conditions, v = get_prev_data()
 
     for condition in conditions:
         print(f"Validate condition: {condition}")
