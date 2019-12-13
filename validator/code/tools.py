@@ -29,13 +29,16 @@ class Company:
 class ValidationRules:
 
     def __init__(self):
-        pass
+        self.global_rules = None
 
-    def validate(self):
-        pass
+    def validate(self, r):
+        self.global_rules = r
 
-    def _condition(self):
-        pass
+    def _condition(self, options):
+
+
+    def type(self, rule, options):
+        return getattr(self, 'type')(s1, s2)
 
     def _do(self):
         pass

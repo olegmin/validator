@@ -3,7 +3,7 @@
 """
 import os
 from filehadler import json_reader
-from tools import Company
+from tools import Company, ValidationRules
 
 
 def get_prev_data():
@@ -31,14 +31,8 @@ def get_prev_data():
 if __name__ == "__main__":
     company, conditions = get_prev_data()
 
-    res = company["egrul.uk"]
-    print(res)
+    v = ValidationRules()
 
-    res = company['cbr']
-    print("\n\n", res)
-
-    res = company['egrul.налогообложение']
-    print("\n\n", res)
-
-    res = company['']
-    print("\n\n", res)
+    for condition in conditions:
+        res = v.validate(condition)
+        print(res)
