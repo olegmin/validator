@@ -3,7 +3,7 @@
 """
 import os
 from filehadler import json_reader
-
+from tools import Company
 
 def get_prev_data():
     """
@@ -21,10 +21,22 @@ def get_prev_data():
         conditions.append(data)
 
     file_path = "/tmp/organizations/organization.json"
-    company = json_reader(file_path)
+    company = Company(json_reader(file_path))
 
     return company, conditions
 
 
 if __name__ == "__main__":
     company, conditions = get_prev_data()
+
+    res = company["egrul.uk"]
+    print(res)
+
+    res = company['cbr']
+    print("\n\n", res)
+
+    res = company['egrul.налогообложение']
+    print("\n\n", res)
+
+    res = company['']
+    print("\n\n", res)
