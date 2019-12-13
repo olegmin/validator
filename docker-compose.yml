@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  validator:
+    build: ./validator
+    image: validator:0.1
+    volumes:
+      - ./validator/code:/appcode
+    command: python3 run.py
